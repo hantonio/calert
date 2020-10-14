@@ -33,9 +33,6 @@ data:
     [app.chat.awesomeRoomTwo]
     notification_url = "https://chat.googleapis.com/v1/spaces/xxx/messages?key=abc-xyz&token=token-unique-key%3D"
 
-    [app.chat.prometheus]
-    notification_url = "https://chat.googleapis.com/v1/spaces/AAAAnts4TxA/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=JdRZjkXk48i1tY8xSvYXa6uSoHlTJL6CyJh-qDujoUw%3D"    
-
   message.tmpl: |
     *{{ .Labels.alertname | Title }} - {{.Status | Title }} ({{.Labels.severity | toUpper }})*
     {{ range .Annotations.SortedPairs -}}

@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: calert
+spec:
+  selector:
+    matchLabels:
+      app: calert
+  template:
+    metadata:
+      labels:
+        app: calert
+        release: calert
+    spec:
+      containers:
+      - name: calert
+        image: "hantonio/calert:v1.2.1"
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 6000
+          name: http
+        volumeMounts:
+        - mountPath: /etc/calert/config.toml
+          subPath: config.toml
+          name: calert-configmap-volume
+        - mountPath: /etc/calert/message.tmpl
+          subPath: message.tmpl
+          name: calert-configmap-volume
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes:
+      - name: calert-configmap-volume
+        configMap:
+          name: calert-configmap
+          
